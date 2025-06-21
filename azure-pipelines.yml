@@ -1,0 +1,41 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- checkout: self
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.0.x'
+
+- script: dotnet restore AgentWebApp/AgentWebApp.csproj
+  displayName: 'Restore dependencies'
+
+- script: dotnet build AgentWebApp/AgentWebApp.csproj --configuration $(buildConfiguration) --no-restore
+  displayName: 'Build'
+
+- script: dotnet test AgentWebApp/AgentWebApp.csproj --no-build --verbosity normal
+  displayName: 'Test'
+
+- script: dotnet publish AgentWebApp/AgentWebApp.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+
+# Optional: Deploy to Azure Web App
+# - task: AzureWebApp@1
+#   inputs:
+#     azureSubscription: '<YOUR-AZURE-SERVICE-CONNECTION-NAME>'
+#     appType: 'webApp'
+#     appName: '<YOUR-APP-SERVICE-NAME>'
+#     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
