@@ -32,10 +32,9 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
 
-# Optional: Deploy to Azure Web App
-# - task: AzureWebApp@1
-#   inputs:
-#     azureSubscription: '<YOUR-AZURE-SERVICE-CONNECTION-NAME>'
-#     appType: 'webApp'
-#     appName: '<YOUR-APP-SERVICE-NAME>'
-#     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'FirstServiceConnection'
+    appType: 'webApp'
+    appName: 'AgentApp'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
