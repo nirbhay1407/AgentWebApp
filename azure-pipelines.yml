@@ -39,7 +39,6 @@ steps:
 #     appName: 'AgentApp'
 #     package: '$(Build.ArtifactStagingDirectory)/IocContainer.zip'
 
-
 # 1. Publish the project
 - task: DotNetCoreCLI@2
   inputs:
@@ -53,13 +52,13 @@ steps:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/IocContainer.zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/AgentWebApp.zip'
     replaceExistingArchive: true
 
 # 3. Publish the ZIP as an artifact
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)/IocContainer.zip'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)/AgentWebApp.zip'
     artifactName: 'drop'
 
 # 4. Deploy to Azure Web App
@@ -68,4 +67,4 @@ steps:
     azureSubscription: 'FirstServiceConnection'
     appType: 'webApp'
     appName: 'AgentApp'
-    package: '$(Pipeline.Workspace)/drop/IocContainer.zip'
+    package: '$(Pipeline.Workspace)/drop/AgentWebApp.zip'
