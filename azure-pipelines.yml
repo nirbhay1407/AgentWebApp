@@ -24,7 +24,7 @@ steps:
 - script: dotnet test AgentWebApp/AgentWebApp.csproj --no-build --verbosity normal
   displayName: 'Test'
 
-- script: dotnet publish AgentWebApp/AgentWebApp.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+- script: dotnet publish AgentWebApp/AgentWebApp.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish
   displayName: 'Publish'
 
 # - task: PublishBuildArtifacts@1
@@ -49,16 +49,16 @@ steps:
 # 2. Archive the published output as a ZIP
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/publish'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/AgentWebApp.zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/publish/AgentWebApp.zip'
     replaceExistingArchive: true
 
 # 3. Publish the ZIP as an artifact
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)/AgentWebApp.zip'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)/publish/AgentWebApp.zip'
     artifactName: 'drop'
 
 # 4. Deploy to Azure Web App
