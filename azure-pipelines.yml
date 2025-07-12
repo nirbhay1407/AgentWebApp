@@ -38,3 +38,5 @@ steps:
     appType: 'webApp'
     appName: 'AgentApp'
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+
+- task: PublishBuildArtifacts@1
