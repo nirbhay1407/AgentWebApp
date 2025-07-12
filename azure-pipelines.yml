@@ -61,6 +61,14 @@ steps:
     pathToPublish: '$(Build.ArtifactStagingDirectory)/publish/AgentWebApp.zip'
     artifactName: 'drop'
 
+# 3.5. Download the artifact for deployment
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'current'
+    downloadType: 'single'
+    artifactName: 'drop'
+    downloadPath: '$(Pipeline.Workspace)'
+
 # 4. Deploy to Azure Web App
 - task: AzureWebApp@1
   inputs:
