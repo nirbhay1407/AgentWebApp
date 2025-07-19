@@ -1,0 +1,370 @@
+/*
+* demo.css
+* File include item demo only specific css only
+******************************************************************************/
+
+.menu .app-brand.demo {
+    height: 64px;
+    margin-top: 12px;
+}
+
+.app-brand-logo.demo svg {
+    width: 22px;
+    height: 38px;
+}
+
+.app-brand-text.demo {
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
+    text-transform: lowercase;
+}
+
+/* ! For .layout-navbar-fixed added fix padding top tpo .layout-page */
+/* Detached navbar */
+.layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
+    padding-top: 76px !important;
+}
+/* Default navbar */
+.layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
+    padding-top: 64px !important;
+}
+
+/* Navbar page z-index issue solution */
+.content-wrapper .navbar {
+    z-index: auto;
+}
+
+/*
+* Content
+******************************************************************************/
+
+.demo-blocks > * {
+    display: block !important;
+}
+
+.demo-inline-spacing > * {
+    margin: 1rem 0.375rem 0 0 !important;
+}
+
+/* ? .demo-vertical-spacing class is used to have vertical margins between elements. To remove margin-top from the first-child, use .demo-only-element class with .demo-vertical-spacing class. For example, we have used this class in forms-input-groups.html file. */
+.demo-vertical-spacing > * {
+    margin-top: 1rem !important;
+    margin-bottom: 0 !important;
+}
+
+.demo-vertical-spacing.demo-only-element > :first-child {
+    margin-top: 0 !important;
+}
+
+.demo-vertical-spacing-lg > * {
+    margin-top: 1.875rem !important;
+    margin-bottom: 0 !important;
+}
+
+.demo-vertical-spacing-lg.demo-only-element > :first-child {
+    margin-top: 0 !important;
+}
+
+.demo-vertical-spacing-xl > * {
+    margin-top: 5rem !important;
+    margin-bottom: 0 !important;
+}
+
+.demo-vertical-spacing-xl.demo-only-element > :first-child {
+    margin-top: 0 !important;
+}
+
+.rtl-only {
+    display: none !important;
+    text-align: left !important;
+    direction: ltr !important;
+}
+
+[dir='rtl'] .rtl-only {
+    display: block !important;
+}
+
+/*
+* Layout demo
+******************************************************************************/
+
+.layout-demo-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.layout-demo-placeholder img {
+    width: 900px;
+}
+
+.layout-demo-info {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400);
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: #111 url(https://codepen.io/images/classy_fabric.png);
+    color: #fff;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+body {
+    padding: 20px;
+}
+
+.timer-group {
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+    width: 400px;
+}
+
+.timer {
+    border-radius: 50%;
+    height: 100px;
+    overflow: hidden;
+    position: absolute;
+    width: 100px;
+}
+
+    .timer:after {
+        background: #111 url(https://codepen.io/images/classy_fabric.png);
+        border-radius: 50%;
+        content: "";
+        display: block;
+        height: 80px;
+        left: 10px;
+        position: absolute;
+        width: 80px;
+        top: 10px;
+    }
+
+    .timer .hand {
+        float: left;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        width: 50%;
+    }
+
+        .timer .hand span {
+            border: 50px solid rgba(0, 255, 255, .4);
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-radius: 50%;
+            display: block;
+            height: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform: rotate(225deg);
+            width: 0;
+        }
+
+        .timer .hand:first-child {
+            transform: rotate(180deg);
+        }
+
+        .timer .hand span {
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .timer .hand:first-child span {
+            animation-name: spin1;
+        }
+
+        .timer .hand:last-child span {
+            animation-name: spin2;
+        }
+
+    .timer.hour {
+        background: rgba(0, 0, 0, .3);
+        height: 400px;
+        left: 0;
+        width: 400px;
+        top: 0;
+    }
+
+        .timer.hour .hand span {
+            animation-duration: 3600s;
+            border-top-color: rgba(255, 0, 255, .4);
+            border-right-color: rgba(255, 0, 255, .4);
+            border-width: 200px;
+        }
+
+        .timer.hour:after {
+            height: 360px;
+            left: 20px;
+            width: 360px;
+            top: 20px;
+        }
+
+    .timer.minute {
+        background: rgba(0, 0, 0, .2);
+        height: 350px;
+        left: 25px;
+        width: 350px;
+        top: 25px;
+    }
+
+        .timer.minute .hand span {
+            animation-duration: 60s;
+            border-top-color: rgba(0, 255, 255, .4);
+            border-right-color: rgba(0, 255, 255, .4);
+            border-width: 175px;
+        }
+
+        .timer.minute:after {
+            height: 310px;
+            left: 20px;
+            width: 310px;
+            top: 20px;
+        }
+
+    .timer.second {
+        background: rgba(0, 0, 0, .2);
+        height: 300px;
+        left: 50px;
+        width: 300px;
+        top: 50px;
+    }
+
+        .timer.second .hand span {
+            animation-duration: 1s;
+            border-top-color: rgba(255, 255, 255, .15);
+            border-right-color: rgba(255, 255, 255, .15);
+            border-width: 150px;
+        }
+
+        .timer.second:after {
+            height: 296px;
+            left: 2px;
+            width: 296px;
+            top: 2px;
+        }
+
+.face {
+    background: rgba(0, 0, 0, .1);
+    border-radius: 50%;
+    left: 52px;
+    padding: 165px 40px 0;
+    position: absolute;
+    width: 296px;
+    text-align: center;
+    top: 32%;
+}
+
+    .face h2 {
+        font-weight: 300;
+    }
+
+    .face p {
+        border-radius: 20px;
+        font-size: 50px;
+        font-weight: 400;
+        position: absolute;
+        top: 17px;
+        width: 260px;
+        left: 20px;
+    }
+
+@keyframes spin1 {
+    0% {
+        transform: rotate(225deg);
+    }
+
+    50% {
+        transform: rotate(225deg);
+    }
+
+    100% {
+        transform: rotate(405deg);
+    }
+}
+
+@keyframes spin2 {
+    0% {
+        transform: rotate(225deg);
+    }
+
+    50% {
+        transform: rotate(405deg);
+    }
+
+    100% {
+        transform: rotate(405deg);
+    }
+}
+
+
+.base-timer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+
+.base-timer__label {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}

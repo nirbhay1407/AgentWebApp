@@ -1,0 +1,16 @@
+﻿@model Ioc.Core.DbModel.Models.Quiz.AnswerSetup
+
+<div class="answer-setup">
+    <div>
+        <label>Answer Text:</label>
+        <input asp-for="Text" class="form-control" />
+    </div>
+    <div>
+        <label>Description:</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div>
+        <label>Is Correct:</label>
+        <input asp-for="IsCorrect" type="checkbox" class="form-check-input" />
+    </div>
+</div>

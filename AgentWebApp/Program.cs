@@ -1,82 +1,74 @@
-using AgentWebApp.Data;
-using AgentWebApp.Models;
-using AgentWebApp.Repositories;
+using Hangfire;
+using Ioc.Core;
+using Ioc.Core.EnumClass;
+using Ioc.Core.Helper;
+using Ioc.Data.Caches;
+using Ioc.Data.Data;
+using IocContainer.Mapping;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
-
 // Add services to the container.
-// Register ApplicationDbContext with SQL Server
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(connectionString));
-// For PostgreSQL, you can use the following line instead:
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionPQ") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<IocDbContext>(options =>
     options.UseNpgsql(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+//added connnection string to the External logget Ectensioon class
+//builder.Services.AddSingleton<ExceptionExtensions>(new ExceptionExtensions(connectionString));
+ExceptionExtensions.SetConnectionString(connectionString);
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddDefaultUI()
+    .AddEntityFrameworkStores<IocDbContext>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register repository
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.MapServiceSingleton();
+//builder.Services.MapServiceSingleton();
 
-// Register ILogger for ApplicationDbContext
-builder.Services.AddLogging();
+//builder.Services.AddApplicationInsightsTelemetry();
 
-var app = builder.Build();
+builder.Services.AddMvcCore();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-app.MapDefaultEndpoints();
 
-// Global exception handling middleware
-app.Use(async (context, next) =>
+builder.Services.Configure<CacheConfiguration>(builder.Configuration.GetSection("CacheConfiguration"));
+//For In-Memory Caching
+builder.Services.AddMemoryCache();
+builder.Services.AddTransient<MemoryCacheService>();
+builder.Services.AddTransient<RedisCacheService>();
+builder.Services.AddTransient<Func<CacheTech, ICacheService>>(serviceProvider => key =>
 {
-    try
+    switch (key)
     {
-        await next();
-    }
-    catch (Exception ex)
-    {
-        var logger = context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("GlobalException");
-        logger.LogError(ex, "Unhandled exception occurred while processing request: {Path}", context.Request.Path);
-
-        // Log to DbChangeLog if possible
-        try
-        {
-            var db = context.RequestServices.GetService<ApplicationDbContext>();
-            if (db != null)
-            {
-                db.DbChangeLogs.Add(new DbChangeLog
-                {
-                    EntityName = "GlobalException",
-                    State = "Exception",
-                    Values = $"Path: {context.Request.Path}",
-                    Exception = ex.ToString(),
-                    Timestamp = DateTime.UtcNow
-                });
-                db.SaveChanges();
-            }
-        }
-        catch { /* Swallow logging errors to avoid recursive exceptions */ }
-
-        context.Response.StatusCode = 500;
-        await context.Response.WriteAsync("An unexpected error occurred. Please try again later.");
+        case CacheTech.Memory:
+            return serviceProvider.GetService<MemoryCacheService>();
+        case CacheTech.Redis:
+            return serviceProvider.GetService<RedisCacheService>();
+        default:
+            return serviceProvider.GetService<MemoryCacheService>();
     }
 });
 
+//builder.Services.AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("DbContextConnection")));
+//builder.Services.AddHangfireServer();
+builder.Services.AddSession();
+builder.Services.AddMvc();
+//builder.Services.AddHostedService<AccountRemovalService>();
+
+builder.Services.AddControllers();
+var app = builder.Build();
+
+
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseMigrationsEndPoint();
-}
-else
+if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -86,13 +78,15 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.MapControllers();
 app.UseRouting();
-
+app.UseAuthentication(); ;
 app.UseAuthorization();
+app.MapRazorPages();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
 
 app.Run();

@@ -1,0 +1,185 @@
+﻿@using Ioc.ObjModels.Model
+@model QuizViewModel
+
+<h2>Quiz</h2>
+
+
+<div class="container-fluid">
+    <div class="col-sm-7">
+        @using (Html.BeginForm("SubmitQuiz", "QuizSetup", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div id="quizTabs">
+                <ul class="nav nav-tabs">
+                    @foreach (var question in Model.Questions)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#question-@question.Id" data-toggle="tab">@question.Id</a>
+                        </li>
+                    }
+                </ul>
+
+                <div class="tab-content">
+                    @for (int i = 0; i < Model.Questions.Count; i++)
+                    {
+                        <div class="tab-pane fade" id="question-@Model.Questions[i].Id">
+                            <h3>@Model.Questions[i].QuestionText</h3>
+
+                            @for (int j = 0; j < Model.Questions[i].Options.Count; j++)
+                            {
+                                <div class="form-check">
+                                    @Html.RadioButton(Model.Questions[i].Options[j].AnswerText, Model.Questions[i].Options[j].Id, Model.Questions[i].Options[j].IsSelected)
+                                    @Model.Questions[i].Options[j].AnswerText
+                                    @*<input class="form-check-input" type="radio" id="answer-@answer.Id" name="answers[@i].Selected" for="@answer.Id" />
+                                        <label class="form-check-label" for="answer-@answer.Id">
+                                        @answer.AnswerText
+                                        </label>*@
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <button id="prevBtn" type="button" class="btn btn-secondary">Previous</button>
+                <button id="nextBtn" type="button" class="btn btn-primary">Next</button>
+            </div>
+            <div class="mt-3">
+                <input type="submit" value="Submit Quiz" class="btn btn-secondary" id="submitQuizBtn" />
+            </div>
+        }
+    </div>
+    <div class="col-sm-4">
+        <div class="timer-group">
+            <div class="timer hour">
+                <div class="hand"><span></span></div>
+                <div class="hand"><span></span></div>
+            </div>
+            <div class="timer minute">
+                <div class="hand"><span></span></div>
+                <div class="hand"><span></span></div>
+            </div>
+            <div class="timer second">
+                <div class="hand"><span></span></div>
+                <div class="hand"><span></span></div>
+            </div>
+            <div class="face">
+                <p id="timer">00:00:00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script>
+    $(document).ready(function () {
+        $('#quizTabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+
+        });
+
+        $('#nextBtn').click(function () {
+            var activeTab = $('#quizTabs .nav-link.active');
+            var nextTab = activeTab.parent().next().find('a');
+
+            if (nextTab.length === 0) {
+                // If there are no more tabs, submit the form or perform any other necessary action
+                // For simplicity, an alert is shown here
+                alert('Quiz completed!');
+            } else {
+                nextTab.tab('show');
+            }
+        });
+
+        $('#prevBtn').click(function () {
+            var activeTab = $('#quizTabs .nav-link.active');
+            var prevTab = activeTab.parent().prev().find('a');
+
+            if (prevTab.length !== 0) {
+                prevTab.tab('show');
+            }
+        });
+    });
+</script>
+}
+
+
+@*@using (Html.BeginForm("SubmitQuiz", "QuizSetup", FormMethod.Post))
+    {
+    <div id="quizContainer">
+    @for (int i = 0; i < Model.Questions.Count; i++)
+    {
+    <h4>@Model.Questions[i].QuestionText</h4>
+
+    <ul>
+    @for (int j = 0; j < Model.Questions[i].Options.Count; j++)
+    {
+    <li>
+    @Html.RadioButtonFor(m => m.Questions[i].SelectedAnswer, Model.Questions[i].Options[j])
+    <label>@Model.Questions[i].Options[j]</label>
+    </li>
+    }
+    </ul>
+    }
+    </div>
+
+    <div>
+    <input type="submit" value="Submit Quiz" id="submitQuizBtn" />
+    </div>
+    }*@
+
+<script>
+
+    var duration = 180; // 3 minutes
+
+    var timerElement =null;
+    var timerInterval;
+    var secondsLeft;
+
+    function startTimer() {
+        timerElement = document.getElementById("timer");
+        secondsLeft = duration;
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+      var hours = Math.floor(secondsLeft / 3600);
+      var minutes = Math.floor((secondsLeft % 3600) / 60);
+      var seconds = secondsLeft % 60;
+
+      var timeString = pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+      timerElement.innerText = timeString;
+
+      secondsLeft--;
+
+      if (secondsLeft < 0) {
+        clearInterval(timerInterval);
+        // Timer has ended, perform desired action here
+        alert("Timer has ended!");
+        submitQuiz();
+      }
+    }
+
+    function pad(value) {
+      return value.toString().padStart(2, "0");
+    }
+    function submitQuiz() {
+        clearInterval(timerInterval);
+        document.getElementById("submitQuizBtn").click();
+    }
+
+    window.onload = function () {
+      startTimer();
+      var fisrtsQ = $('#question-1');
+      if(fisrtsQ!=undefined){
+        fisrtsQ.removeClass("fade");
+        fisrtsQ.addClass("show active");
+        $('#quizTabs .nav-link').first().addClass("active");
+      }
+    };
+</script>
+
+

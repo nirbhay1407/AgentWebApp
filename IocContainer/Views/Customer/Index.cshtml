@@ -1,0 +1,64 @@
+﻿@using Ioc.ObjModels.Model
+@model List<CustomerModel>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Home /</span> Excel Data</h4>
+    <p>
+        <a asp-action="UploadData">Upload Data</a>
+    </p>
+    <br />
+    <div class="card">
+        <h5 class="card-header">Excel Data</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>DateOfBirth</th>
+                        <th>CreatedAt</th>
+                        <th>ModifiedDate</th>
+                        <th>IsDelete</th>
+                        <th>IsActive</th>
+                        <th>CreatedBy</th>
+                        <th>ModifiedBy</th>
+                        <th>AddressID</th>
+                        <th>CompanyName</th>
+                        <th>Mobile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ID</td>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.Contact</td>
+                            <td>@item.Email</td>
+                            <td>@item.DateOfBirth</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>@item.CompanyName</td>
+                            <td>@item.Mobile</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+</div>

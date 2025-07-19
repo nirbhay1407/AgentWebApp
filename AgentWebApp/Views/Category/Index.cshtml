@@ -1,0 +1,183 @@
+﻿@model PaginatedList<CategoryModel>
+
+@{
+    ViewData["Title"] = "Index";
+    var index = 1;
+}
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Home/ <a asp-action="Create"> Category list</a></h4>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+    <div class="card">
+        <h5 class="card-header">List of Categories</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayText("Sl No.")
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].ID)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>@index</strong></td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            @*<td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                </td>*@
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="@Url.Action("Create", "Category", new { id=item.ID })">
+                                            <i class="bx bx-edit-alt me-2"></i> Edit
+                                        </a>
+                                        <a class="dropdown-item" href="@Url.Action("Details", "Category")"><i class="bx bx-edit-alt me-2"></i> Details</a>
+                                        <a class="dropdown-item" href="javascript:void(0);" onclick="handleDelete('@item.ID')"><i class="bx bx-trash me-2 delete"></i> Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                </tbody>
+            </table>
+
+            @await Html.PartialAsync("~/Views/PartialViewItem/_PaginationNav.cshtml", Model)
+
+        </div>
+    </div>
+    <div class="alert alert-primary alert-dismissible" role="alert">
+        This is a primary dismissible alert — check it out!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <button class="btn btn-bg-primary" onclick="ToDesign('Primary', 'He baby')">Popup</button>
+
+
+
+</div>
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('.delete').on('click', function (e, data) {
+                if (!data) {
+                    handleDelete(e, 1);
+                } else {
+                    window.location = $(this).attr('href');
+                }
+            });
+  
+    $('#dataTable').dataTable({  
+         "paging": false, // Disable default pagination
+           // "searching": false, // Disable searching
+            //"info": false // Disable info
+    });  
+
+        });
+
+
+        function handleDelete(id) {
+               //swal({
+               //    title: "Are you sure?",
+               //    text: "You will not be able to recover the delaer again!",
+               //    type: "warning",
+               //    showCancelButton: true,
+               //    confirmButtonColor: "#DD6B55",
+               //    confirmButtonText: "Yes, delete!",
+               //    closeOnConfirm: false
+               //},
+               //function (isConfirm) {
+               //    if (isConfirm) {
+               //        $(e.target).trigger('click', {});
+               //    }
+               //});
+               bootbox.confirm({
+                                    title: 'Destroy planet?',
+                                    message: 'Do you want to activate the Deathstar now? This cannot be undone.',
+                                    buttons: {
+                                    cancel: {
+                                    label: '<i class="fa fa-times"></i> Cancel'
+                                    },
+                                    confirm: {
+                                    label: '<i class="fa fa-check"></i> Confirm'
+                                    }
+                                    },
+                                    callback: function (result) {
+                                    console.log('This was logged in the callback: ' + id);
+                                     $.ajax({
+                                            type: "Delete",
+                                            url: "Category/Delete?id="+id,
+                                            success: function (response) {
+                                                if(response.status==200){
+                                                    ToDesign('Sucess');
+                                                    location.reload();
+                                                }
+
+
+                                            },
+                                            //failure: function (response) {
+                                            //    bootbox.alert(response.responseText);
+                                            //},
+                                            error: function (response) {
+                                                bootbox.alert(response.responseText);
+                                            }
+                                        });
+                                    }
+                                    });
+                                    }
+
+    $(document).ready(function(){
+        $("#myBtn").click(function(){
+            // Passing option
+            $("#myToast").toast({
+                delay: 10000
+            });
+
+            // Show toast
+            $("#myToast").toast("show");
+        });
+    });
+
+
+</script>

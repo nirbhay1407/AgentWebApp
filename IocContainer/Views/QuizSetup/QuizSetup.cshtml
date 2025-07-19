@@ -1,0 +1,39 @@
+﻿@model Ioc.Core.DbModel.Models.Quiz.QuizSetup
+
+@{
+    ViewData["Title"] = "Quiz Setup";
+}
+
+<h2>Quiz Setup</h2>
+
+<form asp-action="SaveQuiz" method="post">
+    <div>
+        <label>Title:</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div>
+        <label>Description:</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <h4>Questions</h4>
+    <button type="button" class="btn btn-primary" onclick="addQuestion()">Add Question</button>
+    <div id="questions">
+        @foreach (var question in Model.QuizDescription)
+        {
+            <partial name="_QuestionSetup" model="question.QuestionSetup" />
+        }
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Quiz</button>
+</form>
+
+@section Scripts {
+    <script>
+        function addQuestion() {
+            $.get('@Url.Action("AddQuestion", "Quiz")', function (data) {
+                $('#questions').append(data);
+            });
+        }
+    </script>
+}

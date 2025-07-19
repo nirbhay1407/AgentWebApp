@@ -1,0 +1,358 @@
+﻿@using Ioc.ObjModels.Model
+@model UserModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Home/ <a asp-action="Create">User List</a></h4>
+    <div class="card">
+        <h5 class="card-header">User List <button type="button" class="btn btn-sm btn-primary AddBtn">Add User</button></h5>
+        @* <div class="alert alert-primary alert-dismissible" role="alert">
+            This is a primary dismissible alert — check it out!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> *@
+        <div class="table-responsive text-nowrap">
+            <table class="table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Sl No</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        @* <th width="100px">Address</th> *@
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Added Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Vertically Centered Modal -->
+<div class="col-lg-4 col-md-6">
+    <div class="mt-3">
+        <!-- Modal -->
+        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
+                        <button type="button" class="btn-close modelReset" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form fields for user details -->
+                        <form id="UserForm">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="hidden" class="form-control" id="id">
+                                <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                <sapn class="alert-danger" id="firstNameValidationMsg"></sapn>
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                            <div class="form-group">
+                                <label for="userName">User Name</label>
+                                <input type="text" class="form-control" id="userName" name="userName">
+                                <sapn class="alert-danger" id="userNameValidationMsg"></sapn>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input class="form-control" type="email" value="@@gmail.com" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe" />
+                                <sapn class="alert-danger" id="emailValidationMsg"></sapn>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-label-secondary modelReset">Close</button>
+                        <button type="button" class="btn btn-primary save-changes">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <script src="~/Validator.js" type="text/javascript"></script> *@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "autoWidth": false,
+            "ajax": {
+                "url": "/User/GetUsers",
+                "type": "GET",
+                //"beforeSend": showLoader,
+                "data": function (d) {
+                    // You can customize the request here
+                    return {
+                        draw: d.draw,
+                        start: d.start,
+                        length: d.length,
+                        search: d.search,
+                        order: d.order
+                        // Any additional parameters you want to send
+                    }
+                }
+                // ,
+                // "dataSrc": function (json) {
+                //     $('#modalLoader').modal('hide');
+                //     return json.data;
+                // }
+            },
+            "columns": [
+                {
+                    "data": null,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    },
+                    "orderable": false
+                },
+                {
+                    "data": "id",
+                    "searchable": false,
+                    "visible": false,
+                    "orderable": false
+                },
+                //{ "data": "userProfile.firstName" },
+                {
+                    "data": "userProfile",
+                    "render": function (data, type, row, meta) {
+                        return data.firstName + ' ' + data.lastName;
+                    },
+                    "orderable": false
+                },
+                //{ "data": "userProfile.address" },
+                { "data": "userName" },
+                { "data": "email" },
+                { "data": "createdAt" },
+                { // Actions column
+                    "data": "id",
+                    "render": function (data, type, row) {
+                        return `
+                          <button data-id="${data}"  class="btn btn-sm btn-primary edit-button">Edit</button>
+                         <button data-id="${data}"  class="btn btn-sm btn-danger delete-button">Delete</button>`
+                                                          
+                    },
+                    "orderable": false,
+                    "searchable": false
+                }
+            ]
+
+            ,"columnDefs": [
+                { width: '100px', targets: 3 }  //step 2, column 3 out of 4
+            ]
+        });
+
+
+
+
+        // Show modal on Edit button click
+        $('#dataTable').on('click', '.edit-button', function () {
+            debugger;
+            var userId = $(this).data('id');
+            // Fetch user details using AJAX and populate the form (not implemented here)
+            $('#modalCenter').modal('show');
+
+            $.ajax({
+                type: 'GET',
+                beforeSend: showLoader,
+                url: '/User/CreateEditUser/' + userId,
+                success: function (result) {
+                    $('#modalLoader').modal('hide');
+                    console.log(result);
+                    if (result.success) {
+                        ToDesign('Sucess', result.message);
+                        $('#id').val(result.data.id);
+                        $('#firstName').val(result.data.firstName);
+                        $('#lastName').val(result.data.lastName);
+                        $('#address').val(result.data.address);
+                        $('#userName').val(result.data.userName);
+                        $('#formValidationEmail').val(result.data.email);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Failed');
+                    $('#modalCenter').modal('show');
+                    console.log('Failed', error);
+                }
+            });
+
+        });
+
+        // Save changes (modal)
+        $('#saveChanges').click(function () {
+            // Save changes using AJAX (not implemented here)
+            //$('#modalCenter').modal('hide');
+        });
+
+        $('.modelReset').click(function () {
+            // Save changes using AJAX (not implemented here)
+            reset();
+            $('#modalCenter').modal('hide');
+            $('#modalLoader').modal('hide');
+        });
+
+        var arrayOfId = ["firstNameValidationMsg", "userNameValidationMsg", "emailValidationMsg"];
+
+        // Add new (modal)
+        $('.AddBtn').click(function () {
+            reset();
+            resetFields(arrayOfId);
+            // Save changes using AJAX (not implemented here)
+            $('#modalCenter').modal('show');
+        });
+
+        function reset() {
+            $('#id').val("");
+            $('#firstName').val("");
+            $('#lastName').val("");
+            $('#address').val("");
+            $('#userName').val("");
+            $('#formValidationEmail').val("");
+        }
+
+        $('.save-changes').click(function () {
+            debugger;
+            var validationPass = true;
+            resetFields(arrayOfId);
+
+            var data = $("#UserForm").serialize();
+            var firstName = $('#firstName').val();
+            var lastName = $('#lastName').val();
+            var address = $('#address').val();
+            var userName = $('#userName').val();
+            var email = $('#formValidationEmail').val();
+
+            if (isNullOrEmpty(firstName.trim())) {
+                $('#' + arrayOfId[0]).text("This fields is required.");
+                validationPass = false;
+            } else
+                doBlank(arrayOfId[0]);
+
+            if (isNullOrEmpty(userName.trim())) {
+                $('#' + arrayOfId[1]).text("Username is required.");
+                validationPass = false;
+            } else if (!isValidUsername(userName.trim())) {
+                $('#' + arrayOfId[1]).text("Username is not valid.");
+                validationPass = false;
+            } else
+                doBlank(arrayOfId[1]);
+
+            //var emailReg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (isNullOrEmpty(email.trim())) {
+                $('#' + arrayOfId[2]).text("Email is required.");
+                validationPass = false;
+            } else if (!isValidEmail(email)) {
+                $('#' + arrayOfId[2]).text("Invalid Email Formate");
+                validationPass = false;
+            } else
+                doBlank(arrayOfId[2]);
+
+            if (!validationPass) {
+                return validationPass;
+            }
+            var id = $('#id').val();
+            var objData = {
+                "ID": id ? id : "00000000-0000-0000-0000-000000000000",
+                "FirstName": firstName,
+                "LastName": lastName,
+                "Address": address,
+                "UserName": userName,
+                "Email": email,
+                "Password": "Nk@123", // Include the password field
+                "AddedDate": new Date().toISOString() // Use toISOString for proper formatting
+            };
+
+            console.log(objData);
+
+            $.ajax({
+                type: 'POST',
+                url: '/User/CreateEditUserAPI',
+                data: JSON.stringify(objData),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.success) {
+                        $('#modalCenter').modal('hide');
+                        bootbox.alert(result.message);
+                        location.reload();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    bootbox.alert("Failed");
+                    $('#modalCenter').modal('show');
+                }
+            });
+            //$('#modalCenter').modal('hide');
+        });
+
+        $('.modal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    });
+
+    
+
+
+    $('#dataTable').on('click', '.delete-button', function () {
+        debugger;
+        var id = $(this).data('id');
+
+        bootbox.confirm({
+            //title: 'Destroy planet?',
+            message: 'Do you want to delete? This cannot be undone.',
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm'
+                }
+            },
+            callback: function (result) {
+                console.log('This was logged in the callback: ' + id);
+                $.ajax({
+                    type: "DELETE",
+                    url: "User/DeleteUserAPI/" + id,
+                    success: function (response) {
+                        if (response.success) {
+                            ToDesign('Sucess', response.message)
+                            location.reload();
+                        }
+
+
+                    },
+                    //failure: function (response) {
+                    //    bootbox.alert(response.responseText);
+                    //},
+                    error: function (response) {
+                        bootbox.alert(response.responseText);
+                    }
+                });
+            }
+        });
+    });
+
+
+
+
+</script>

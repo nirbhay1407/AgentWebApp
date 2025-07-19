@@ -1,0 +1,85 @@
+﻿@using Ioc.ObjModels.Model
+@model IEnumerable<InvoiceModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Home/ <a asp-action="Create"> Category list</a></h4>
+    <p oncancel="">
+        <a asp-action="Create">Create New</a>
+    </p>
+    <div class="card">
+        <h5 class="card-header">List of Categories</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>
+                                @Html.DisplayNameFor(model => model.InvoiceNumber)
+                        </th>
+                        <th>
+                                @Html.DisplayNameFor(model => model.InvoiceDate)
+                        </th>
+                        <th>
+                                @Html.DisplayNameFor(model => model.TotalAmount)
+                        </th>
+                        <th>
+                                @Html.DisplayNameFor(model => model.ID)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                    @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                            </td>
+                            <td>
+                                    @Html.DisplayFor(modelItem => item.InvoiceDate)
+                            </td>
+                            <td>
+                                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                            </td>
+                            <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td>
+                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="alert alert-primary alert-dismissible" role="alert">
+        This is a primary dismissible alert — check it out!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <button class="btn btn-bg-primary" onclick="ToDesign('Primary', 'He baby')">Popup</button>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        // $('.delete').on('click', function (e, data) {
+        //     if (!data) {
+        //         handleDelete(e, 1);
+        //     } else {
+        //         window.location = $(this).attr('href');
+        //     }
+        // });
+
+        $('#dataTable').dataTable({
+        });
+
+    });
+</script>
