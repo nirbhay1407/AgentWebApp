@@ -1,0 +1,32 @@
+﻿@model Ioc.Core.DbModel.Models.Quiz.QuestionSetup
+
+<div class="question-setup">
+    <div>
+        <label>Question Text:</label>
+        <input asp-for="Text" class="form-control" />
+    </div>
+    <div>
+        <label>Description:</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <h5>Answers</h5>
+    <button type="button" class="btn btn-secondary" onclick="addAnswer(this)">Add Answer</button>
+    <div class="answers">
+        @foreach (var answer in Model.Answers)
+        {
+            <partial name="_AnswerSetup" model="answer" />
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function addAnswer(button) {
+            var container = $(button).closest('.question-setup').find('.answers');
+            $.get('@Url.Action("AddAnswer", "Quiz")', function (data) {
+                container.append(data);
+            });
+        }
+    </script>
+}

@@ -1,0 +1,74 @@
+﻿@using Ioc.ObjModels.Model
+@model ProductModel
+
+@{
+    ViewData["Title"] = "Product Create";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Sub Category/</span>Product</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="form-floating">
+                                <input asp-for="ID" type="hidden" class="form-control" aria-describedby="floatingInputHelp" />
+
+                                <label asp-for="Name" for="floatingInput"></label>
+                                <input asp-for="Name" class="form-control" aria-describedby="floatingInputHelp" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-floating">
+                                <input asp-for="Description" class="form-control" aria-describedby="floatingInputHelp" />
+                                <label asp-for="Description" for="floatingInput"></label>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-floating">
+                                <input asp-for="Price" class="form-control" aria-describedby="floatingInputHelp" />
+                                <label asp-for="Price" for="floatingInput"></label>
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-floating">
+                                <input asp-for="Quantity" class="form-control" aria-describedby="floatingInputHelp" />
+                                <label asp-for="Quantity" for="floatingInput"></label>
+                                <span asp-validation-for="Quantity" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="card-body">
+                            <div class="form-floating">
+                                <select asp-for="Status" class="form-control" aria-describedby="floatingInputHelp">
+                                    <option>Select Category</option>
+                                    <option value="true">Active</option>
+                                    <option value="false">In-Active</option>
+                                </select>
+                                <label asp-for="Status" for="floatingInput"></label>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

@@ -1,0 +1,586 @@
+﻿@using Ioc.ObjModels.Model.SqlLoadCheckModel
+@model PaginatedList<CompleteUserDetails>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Home/ <a asp-action="Create"> Product list</a></h4>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <div class="card">
+        <h5 class="card-header">List of Categories</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].LastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].City)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].State)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Country)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].PostalCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].PhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].DateOfBirth)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].JobTitle)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Company)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Department)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].ManagerName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].HireDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Salary)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].OfficeLocation)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].EmployeeNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].IsActive)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].LastLoginDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].LastLoginIP)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].IsEmailVerified)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].ProfilePictureUrl)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].LinkedInProfile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].TwitterProfile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].FacebookProfile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].InstagramProfile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].PersonalWebsite)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].BlogUrl)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].GitHubProfile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].StackOverflowProfile)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Bio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Interests)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Skills)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Certifications)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Languages)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Education)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].WorkExperience)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Projects)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Publications)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Awards)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Memberships)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Hobbies)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].FavoriteBooks)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].FavoriteMovies)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].FavoriteMusic)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].FavoriteQuotes)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].FavoritePlaces)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].AddressLine1)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].AddressLine2)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].AlternatePhoneNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].EmergencyContactName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].EmergencyContactPhone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].EmergencyContactRelation)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].BankName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].BankAccountNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].BankBranch)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].BankIFSC)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].PAN)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].PassportNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].PassportExpiryDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].VisaNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].VisaExpiryDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].InsuranceProvider)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].InsurancePolicyNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].InsuranceExpiryDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].SocialSecurityNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].DrivingLicenseNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].DrivingLicenseExpiryDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].VehicleRegistrationNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].VehicleMake)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].VehicleModel)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].VehicleColor)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].VehiclePurchaseDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].VehiclePrice)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].CreditCardNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].CreditCardType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].CreditCardExpiryDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].CreditCardCVV)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].PasswordHash)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].PasswordLastChanged)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].TwoFactorEnabled)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].SecurityQuestion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].SecurityAnswerHash)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].UserPreferencesJson)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].AccountCreatedDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].AccountLastUpdatedDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].IsAccountLocked)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.State)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Country)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PostalCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateOfBirth)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JobTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Company)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Department)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ManagerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HireDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Salary)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OfficeLocation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsActive)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastLoginDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastLoginIP)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsEmailVerified)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProfilePictureUrl)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LinkedInProfile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TwitterProfile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FacebookProfile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InstagramProfile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PersonalWebsite)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BlogUrl)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GitHubProfile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StackOverflowProfile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Bio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Interests)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Skills)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Certifications)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Languages)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Education)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.WorkExperience)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Projects)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Publications)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Awards)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Memberships)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Hobbies)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FavoriteBooks)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FavoriteMovies)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FavoriteMusic)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FavoriteQuotes)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FavoritePlaces)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AddressLine1)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AddressLine2)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AlternatePhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmergencyContactName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmergencyContactPhone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmergencyContactRelation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BankName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BankAccountNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BankBranch)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BankIFSC)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PAN)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PassportNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PassportExpiryDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VisaNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VisaExpiryDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InsuranceProvider)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InsurancePolicyNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InsuranceExpiryDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SocialSecurityNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DrivingLicenseNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DrivingLicenseExpiryDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VehicleRegistrationNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VehicleMake)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VehicleModel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VehicleColor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VehiclePurchaseDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VehiclePrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreditCardNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreditCardType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreditCardExpiryDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreditCardCVV)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PasswordHash)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PasswordLastChanged)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SecurityQuestion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SecurityAnswerHash)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserPreferencesJson)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountCreatedDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountLastUpdatedDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsAccountLocked)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                
+            </table>
+            @await Html.PartialAsync("~/Views/PartialViewItem/_PaginationNav.cshtml", Model)
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#dataTable').dataTable({
+             "paging": false, // Disable default pagination
+            "searching": false, // Disable searching
+            "info": false // Disable info
+        });
+
+    });
+</script>

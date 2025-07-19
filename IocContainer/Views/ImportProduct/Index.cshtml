@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+</head>
+<body>
+    <h3>Upload Excel File</h3>
+    <input type="file" id="fileInput" />
+    <button id="loadExcel">Load Excel Data</button>
+    <table id="excelGrid" class="display" style="width:100%">
+        <thead>
+            <tr id="headers"></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let dataTable;
+
+            $("#loadExcel").click(function () {
+                const fileInput = $("#fileInput")[0];
+                if (!fileInput.files || fileInput.files.length === 0) {
+                    alert("Please select an Excel file to upload.");
+                    return;
+                }
+
+                const file = fileInput.files[0];
+                const formData = new FormData();
+                formData.append("file", file);
+
+                // Send the file to the server
+                $.ajax({
+                    url: "/ImportProduct/LoadExcelData", // Adjust to your endpoint
+                    type: "POST",
+                    data: formData,
+                    contentType: false, // Important for file upload
+                    processData: false, // Prevent jQuery from processing the data
+                    success: function (data) {
+                        if (!data || data.length === 0) {
+                            alert("No data found in the Excel file.");
+                            return;
+                        }
+
+                        // Dynamically populate the headers
+                        const headers = Object.keys(data[0]);
+                        const thead = $("#headers");
+                        thead.empty();
+                        headers.forEach(header => thead.append(`<th>${header}</th>`));
+
+                        // Dynamically populate the rows
+                        const tbody = $("#excelGrid tbody");
+                        tbody.empty();
+                        data.forEach(row => {
+                            const tr = $("<tr></tr>");
+                            headers.forEach(header => tr.append(`<td>${row[header] || ""}</td>`));
+                            tbody.append(tr);
+                        });
+
+                        // Destroy previous DataTable instance if it exists
+                        if (dataTable) {
+                            dataTable.destroy();
+                        }
+
+                        // Initialize or reinitialize DataTable
+                        dataTable = $("#excelGrid").DataTable();
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Error loading data: " + xhr.responseText || error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿@using Ioc.ObjModels.Model
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model TimeZoneModel
+@{
+    var itemsSexPreference = ViewBag.timezone;
+    string SessionTimezone = @HttpContextAccessor?.HttpContext?.Session?.GetString("timezone");
+}
+
+
+<h1>Time Zone</h1>
+
+<div class="container">
+    @* <select asp-for="@itemsSexPreference">
+        <option>Please select one</option>
+        </select>*@
+    
+    <div class="row">
+         <form asp-action="Create">  
+      @Html.DropDownListFor(model => model.TimeZoneName,
+                  new SelectList(itemsSexPreference, "Value", "Key"))
+
+                    <button id="timezoneidSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Set</button>
+        </form>
+    </div>
+    {{@SessionTimezone}}
+    @*{{@Model.TimeZoneName}}*@
+</div>

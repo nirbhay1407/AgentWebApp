@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CommonHelper\CommonHelper.csproj" />
+    <ProjectReference Include="..\Ioc.Core\Ioc.Core.csproj" />
+    <ProjectReference Include="..\Ioc.Data\Ioc.Data.csproj" />
+    <ProjectReference Include="..\Ioc.ObjModels\Ioc.ObjModels.csproj" />
+    <ProjectReference Include="..\Ioc.Service\Ioc.Service.csproj" />
+    <ProjectReference Include="..\LoggerExt\LoggerExt.csproj" />
+    <ProjectReference Include="..\MailService\MailService.csproj" />
+    <ProjectReference Include="..\UserClaimSetup\UserClaimSetup.csproj" />
+  </ItemGroup>
+
+</Project>
