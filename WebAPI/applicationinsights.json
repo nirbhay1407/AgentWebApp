@@ -1,5 +1,0 @@
-{
-  "AzureMonitor": {
-    "ConnectionString": "InstrumentationKey=1df29727-4957-4017-9ed8-8c12eae3a09c;IngestionEndpoint=https://eastasia-0.in.applicationinsights.azure.com/;LiveEndpoint=https://eastasia.livediagnostics.monitor.azure.com/;ApplicationId=b8d1ce0c-2c82-4f48-aed1-c061f9d072a7"
-  }
-}
