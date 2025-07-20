@@ -1,16 +1,18 @@
-﻿using AutoMapper;
+﻿using AgentWebApp.Models;
+using AutoMapper;
 using Ioc.Core.DbModel.Models;
 using Ioc.ObjModels.Model.CommonModel;
 using Ioc.Service.Interfaces;
 using Ioc.Service.Interfaces.Common;
-using AgentWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AgentWebApp.Controllers
 {
-    public class CategoryController : Controller
+	[Authorize]
+	public class CategoryController : Controller
     {
         private readonly ICategoryRepository _repository;
         private readonly ICommonCategory _commonCategory;

@@ -1,9 +1,10 @@
-﻿using AutoMapper;
+﻿using AgentWebApp.Data;
+using AgentWebApp.Models;
+using AutoMapper;
 using Ioc.Core.DbModel.Models;
 using Ioc.Data.UnitOfWorkRepo;
 using Ioc.Service.Interfaces;
-using AgentWebApp.Data;
-using AgentWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -14,6 +15,7 @@ using System.Reflection;
 
 namespace AgentWebApp.Controllers
 {
+    [Authorize]
     public class SubCategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
