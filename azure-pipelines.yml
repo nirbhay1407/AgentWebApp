@@ -13,7 +13,16 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '6.0.x'
+    version: '8.0.x'
+    
+- script: dotnet --info
+  displayName: 'Display SDK Info'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+
 
 - script: dotnet restore AgentWebApp/AgentWebApp.csproj
   displayName: 'Restore dependencies'
