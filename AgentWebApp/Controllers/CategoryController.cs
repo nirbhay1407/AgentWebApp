@@ -7,7 +7,6 @@ using IocContainer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Data.Entity;
 
 namespace IocContainer.Controllers
 {

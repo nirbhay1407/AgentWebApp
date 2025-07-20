@@ -5,9 +5,7 @@ using Ioc.Service.Interfaces;
 using Ioc.Service.Interfaces.Common;
 using IocContainer.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Data.Entity;
 
 namespace IocContainer.Controllers
 {

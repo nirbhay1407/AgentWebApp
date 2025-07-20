@@ -4,7 +4,7 @@ using Ioc.Data;
 using Ioc.Data.Caches;
 using Ioc.Data.Data;
 using Ioc.Service.Interfaces;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ioc.Service.Services
 {

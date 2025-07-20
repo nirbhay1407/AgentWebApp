@@ -6,7 +6,6 @@ using Ioc.ObjModels.Model.DataTableModel;
 using Ioc.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity.Core.Mapping;
 
 namespace IocContainer.Controllers
 {
