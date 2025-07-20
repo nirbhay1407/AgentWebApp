@@ -23,7 +23,11 @@ ExceptionExtensions.SetConnectionString(connectionString);
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddDefaultUI()
     .AddEntityFrameworkStores<IocDbContext>();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddMaps(AppDomain.CurrentDomain.GetAssemblies());
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
