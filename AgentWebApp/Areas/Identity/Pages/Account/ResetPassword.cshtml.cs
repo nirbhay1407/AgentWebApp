@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace IocContainer.Areas.Identity.Pages.Account
+namespace AgentWebApp.Areas.Identity.Pages.Account
 {
     public class ResetPasswordModel : PageModel
     {

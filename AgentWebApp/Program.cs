@@ -4,7 +4,7 @@ using Ioc.Core.EnumClass;
 using Ioc.Core.Helper;
 using Ioc.Data.Caches;
 using Ioc.Data.Data;
-using IocContainer.Mapping;
+using AgentWebApp.Mapping;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

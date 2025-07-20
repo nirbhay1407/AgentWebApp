@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ioc.ObjModels.Model.SiteInfo;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class CompanyController : Controller
     {

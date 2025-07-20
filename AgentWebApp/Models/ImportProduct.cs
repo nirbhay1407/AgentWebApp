@@ -1,6 +1,6 @@
 ﻿using Ioc.Core;
 
-namespace IocContainer.Models
+namespace AgentWebApp.Models
 {
     public class ImportProduct: PublicBaseEntity
     {

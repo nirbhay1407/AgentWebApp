@@ -5,7 +5,7 @@ using Ioc.ObjModels.Model;
 using Ioc.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class QuizSetupController : Controller
     {

@@ -6,7 +6,7 @@ using Ioc.Service.Services;
 using Ioc.Service.Services.Common;
 using Ioc.Service.Services.Validation;
 
-namespace IocContainer.Mapping
+namespace AgentWebApp.Mapping
 {
     public static class ExtForServiceRegistration
     {

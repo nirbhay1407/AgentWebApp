@@ -1,7 +1,7 @@
 ﻿using Ioc.ObjModels;
 using System.ComponentModel.DataAnnotations;
 
-namespace IocContainer.Models
+namespace AgentWebApp.Models
 {
     public class CategoryModel : PublicBaseModel
     {

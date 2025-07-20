@@ -2,7 +2,7 @@
 using Renci.SshNet;
 using System.Data;
 
-namespace IocContainer.SchedularTask
+namespace AgentWebApp.SchedularTask
 {
     public class AccountRemovalService : IHostedService
     {

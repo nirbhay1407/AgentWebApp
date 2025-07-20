@@ -1,4 +1,4 @@
-﻿namespace IocContainer.Models
+﻿namespace AgentWebApp.Models
 {
     public class PaginatedList<T> : List<T>
     {

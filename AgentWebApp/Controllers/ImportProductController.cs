@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using System.Data;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class ImportProductController : Controller
     {

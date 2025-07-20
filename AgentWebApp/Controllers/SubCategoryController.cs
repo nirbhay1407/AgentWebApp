@@ -2,8 +2,8 @@
 using Ioc.Core.DbModel.Models;
 using Ioc.Data.UnitOfWorkRepo;
 using Ioc.Service.Interfaces;
-using IocContainer.Data;
-using IocContainer.Models;
+using AgentWebApp.Data;
+using AgentWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -12,7 +12,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class SubCategoryController : Controller
     {

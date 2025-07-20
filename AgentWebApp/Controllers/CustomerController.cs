@@ -7,7 +7,7 @@ using Ioc.Service.Interfaces.Validation;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class CustomerController : Controller
     {

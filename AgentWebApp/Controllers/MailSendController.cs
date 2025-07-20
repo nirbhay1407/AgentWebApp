@@ -1,7 +1,7 @@
 ﻿using Ioc.ObjModels.Model.CommonModel;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class MailSendController : Controller
     {

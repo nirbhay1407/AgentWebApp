@@ -2,11 +2,11 @@
 using Ioc.ObjModels.Model.SqlLoadCheckModel;
 using Ioc.Service.Interfaces;
 using Ioc.Service.Interfaces.Common;
-using IocContainer.Models;
+using AgentWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing.Printing;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class CompleteUserDetailController : Controller
     {

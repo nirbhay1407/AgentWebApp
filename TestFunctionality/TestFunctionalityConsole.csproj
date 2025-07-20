@@ -14,7 +14,6 @@
     <ProjectReference Include="..\Ioc.ObjModels\Ioc.ObjModels.csproj" />
     <ProjectReference Include="..\Ioc.Service\Ioc.Service.csproj" />
     <ProjectReference Include="..\LoggerExt\LoggerExt.csproj" />
-    <ProjectReference Include="..\MailService\MailService.csproj" />
     <ProjectReference Include="..\UserClaimSetup\UserClaimSetup.csproj" />
   </ItemGroup>
 

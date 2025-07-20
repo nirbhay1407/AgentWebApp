@@ -3,12 +3,12 @@ using Ioc.Core.DbModel.Models;
 using Ioc.ObjModels.Model.CommonModel;
 using Ioc.Service.Interfaces;
 using Ioc.Service.Interfaces.Common;
-using IocContainer.Models;
+using AgentWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class CategoryController : Controller
     {

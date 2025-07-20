@@ -5,7 +5,7 @@ using Ioc.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol.Core.Types;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class ProductController : Controller
     {

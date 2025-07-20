@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
-namespace IocContainer.Areas.Identity.Pages.Account
+namespace AgentWebApp.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {

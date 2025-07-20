@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace IocContainer.Data
+namespace AgentWebApp.Data
 {
     public static class CustomLINQtoDataSetMethods
     {

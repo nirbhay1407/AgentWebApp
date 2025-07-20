@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class UserClaimController : Controller
     {

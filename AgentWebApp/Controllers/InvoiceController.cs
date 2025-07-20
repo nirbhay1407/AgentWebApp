@@ -7,7 +7,7 @@ using Ioc.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class InvoiceController : Controller
     {

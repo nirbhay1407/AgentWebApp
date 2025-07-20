@@ -9,8 +9,8 @@ using Ioc.ObjModels.Model;
 using Ioc.ObjModels.Model.CommonModel;
 using Ioc.ObjModels.Model.SiteInfo;
 using Ioc.ObjModels.Model.SqlLoadCheckModel;
-using IocContainer.Models;
-namespace IocContainer.Mapping
+using AgentWebApp.Models;
+namespace AgentWebApp.Mapping
 {
     internal class AutoMapperProfile : Profile
     {

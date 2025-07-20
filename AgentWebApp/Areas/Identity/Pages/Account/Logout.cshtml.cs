@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace IocContainer.Areas.Identity.Pages.Account
+namespace AgentWebApp.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {

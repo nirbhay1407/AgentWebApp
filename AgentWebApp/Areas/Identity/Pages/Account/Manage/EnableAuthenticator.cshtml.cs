@@ -11,7 +11,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace IocContainer.Areas.Identity.Pages.Account.Manage
+namespace AgentWebApp.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {

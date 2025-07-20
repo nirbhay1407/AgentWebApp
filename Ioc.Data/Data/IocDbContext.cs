@@ -228,9 +228,9 @@ namespace Ioc.Data.Data
             var sqlFiles = Directory.GetFiles(fullPath, "*.sql");
 
 
-            //var sqlFiles = Directory.GetFiles("D:/GIT/MainRepo/IocContainer01/Ioc.Data/_Database/MainDB/ObjectList", "*.sql");
-            var AddList = File.ReadAllText("D:/GIT/MainRepo/IocContainer01/Ioc.Data/_Database/MainDB/NeedToAdd.sql");
-            var deleteList = File.ReadAllText("D:/GIT/MainRepo/IocContainer01/Ioc.Data/_Database/MainDB/NeedToDelete.sql");
+            //var sqlFiles = Directory.GetFiles("D:/GIT/MainRepo/AgentWebApp01/Ioc.Data/_Database/MainDB/ObjectList", "*.sql");
+            var AddList = File.ReadAllText("D:/GIT/MainRepo/AgentWebApp01/Ioc.Data/_Database/MainDB/NeedToAdd.sql");
+            var deleteList = File.ReadAllText("D:/GIT/MainRepo/AgentWebApp01/Ioc.Data/_Database/MainDB/NeedToDelete.sql");
 
             var sqlScripts = new List<string>();
             var sqlAddList = new List<string>();

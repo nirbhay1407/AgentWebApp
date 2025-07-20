@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.ObjectModel;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class TImeZoneSetController : Controller
     {

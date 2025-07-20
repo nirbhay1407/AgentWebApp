@@ -4,7 +4,7 @@ using Ioc.Service.Interfaces.Common;
 using Ioc.Service.Services.Common;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IocContainer.Controllers
+namespace AgentWebApp.Controllers
 {
     public class CommonController : Controller
     {
