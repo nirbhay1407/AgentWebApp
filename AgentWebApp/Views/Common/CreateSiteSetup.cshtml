@@ -1,0 +1,96 @@
+﻿@model SiteSetupModel
+
+@{
+    ViewData["Title"] = "Create Site";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">
+        <span class="text-muted fw-light">Site Setup /</span> Create Site
+    </h4>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="CreateSiteSetup" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <input asp-for="ID" type="hidden" class="form-control" />
+                            <input asp-for="OldValue" type="hidden" class="form-control" />
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="SiteName" class="form-control" />
+                                <label asp-for="SiteName"></label>
+                                <span asp-validation-for="SiteName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="SiteCode" class="form-control" />
+                                <label asp-for="SiteCode"></label>
+                                <span asp-validation-for="SiteCode" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="SiteUrl" class="form-control" />
+                                <label asp-for="SiteUrl"></label>
+                                <span asp-validation-for="SiteUrl" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="SiteLogo" class="form-control" />
+                                <label asp-for="SiteLogo"></label>
+                                <span asp-validation-for="SiteLogo" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="SiteFavicon" class="form-control" />
+                                <label asp-for="SiteFavicon"></label>
+                                <span asp-validation-for="SiteFavicon" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <textarea asp-for="SiteDescription" class="form-control" style="height: 100px;"></textarea>
+                                <label asp-for="SiteDescription"></label>
+                                <span asp-validation-for="SiteDescription" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="SiteKeywords" class="form-control" />
+                                <label asp-for="SiteKeywords"></label>
+                                <span asp-validation-for="SiteKeywords" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="SiteEmail" class="form-control" />
+                                <label asp-for="SiteEmail"></label>
+                                <span asp-validation-for="SiteEmail" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="SitePhone" class="form-control" />
+                                <label asp-for="SitePhone"></label>
+                                <span asp-validation-for="SitePhone" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="SiteAddress" class="form-control" />
+                                <label asp-for="SiteAddress"></label>
+                                <span asp-validation-for="SiteAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-floating">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

@@ -101,6 +101,9 @@ namespace Ioc.Data
         {
             try
             {
+                var siteCode = string.Empty;
+                _cacheService(cacheTech).TryGet("SiteCode",out siteCode);
+                entity.SiteCode = siteCode;
                 //entity.SetCreated(GetUserService.GetUserName());
                 await _dbContext.Set<TEntity>().AddAsync(entity);
                  _dbContext.ChangeTracker.DetectChanges();
@@ -145,7 +148,8 @@ namespace Ioc.Data
                 BackgroundJob.Enqueue(() => RefreshCache());
             }
             catch (Exception ex)
-            {
+            { 
+                throw new Exception($"Error deleting entity with ID {id}: {ex.Message}", ex);
             }
         }
 

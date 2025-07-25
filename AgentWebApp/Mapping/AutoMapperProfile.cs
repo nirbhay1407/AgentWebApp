@@ -65,6 +65,9 @@ namespace AgentWebApp.Mapping
             CreateMap<BankDetailsModel, BankDetails>().ReverseMap();
             CreateMap<ContactDetailsModel, Contact>().ReverseMap();
 
+            CreateMap<SiteSetupModel, SiteSetup>().ReverseMap();
+
+
         }
     }
 }

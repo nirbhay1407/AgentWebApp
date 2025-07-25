@@ -10,13 +10,17 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.7" />
-    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Ioc.Core\Ioc.Core.csproj" />
     <ProjectReference Include="..\Ioc.Data\Ioc.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\SiteSetup\" />
   </ItemGroup>
 
 </Project>

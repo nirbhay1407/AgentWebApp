@@ -30,6 +30,7 @@ namespace AgentWebApp.Mapping
             builder.AddScoped<ICustomerService, CustomerService>(); 
             builder.AddScoped<IValidationRuleRepository, ValidationRuleRepository>(); 
             builder.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.AddScoped<ISiteSetupService, SiteSetupService>();
 
             builder.AddScoped<IocDbContext>();
 

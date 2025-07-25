@@ -29,7 +29,6 @@ namespace Ioc.Core
         public static void SetCreated(this PublicBaseEntity entity, Guid createdBy)
         {
             entity.CreatedBy = createdBy;
-            entity.CreatedAt = DateTime.UtcNow;
         }
 
         public static void SetUpdated(this PublicBaseEntity entity, Guid updatedBy)

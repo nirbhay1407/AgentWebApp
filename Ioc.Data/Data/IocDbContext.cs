@@ -16,6 +16,7 @@ namespace Ioc.Data.Data
 {
     public class IocDbContext : IdentityDbContext<ApplicationUser>
     {
+
         public IocDbContext(DbContextOptions<IocDbContext>? options)
         : base(options)
         {
@@ -47,6 +48,8 @@ namespace Ioc.Data.Data
         public DbSet<ValidationRule> ValidationRule { get; set; }
         public DbSet<ImportProduct> ImportProducts { get; set; }
         public DbSet<LogEntry> LogEntries { get; set; }
+        public DbSet<SiteSetup> SiteSetup { get; set; }
+        
 
         public string GetConnectionString() { return this.Database.GetDbConnection().ConnectionString; }
 
