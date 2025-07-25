@@ -3,9 +3,10 @@ using Ioc.Data;
 
 namespace Ioc.Service.Interfaces.Common
 {
-    public interface ISettingService : IGenericRepository<Setting>
+    public interface ISettingService 
     {
-        bool CheckExist(string setting);
-        void UpdateDB();
+        /*bool CheckExist(string setting);
+        void UpdateDB();*/
+        string Get(string key);
     }
 }

@@ -1,11 +1,14 @@
-﻿using AutoMapper;
+﻿using AgentWebApp.Models;
+using AutoMapper;
 using Ioc.Core;
 using Ioc.Core.DbModel.Models;
 using Ioc.ObjModels.Model;
 using Ioc.ObjModels.Model.DataTableModel;
 using Ioc.Service.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AgentWebApp.Controllers
 {
@@ -324,15 +327,9 @@ namespace AgentWebApp.Controllers
 
         public ActionResult UserProfile()
         {
-            /*UserModel users = userService.GetUsers().Select(u => new UserModel
-            {
-                FirstName = u.UserProfile.FirstName,
-                LastName = u.UserProfile.LastName,
-                Email = u.Email,
-                Address = u.UserProfile.Address,
-                ID = u.ID
-            });*/
-            return View(new UserModel());
+            UserModel model = new UserModel();
+            model = _mapper.Map<UserModel>(new User());
+            return View(model);
         }
     }
 }

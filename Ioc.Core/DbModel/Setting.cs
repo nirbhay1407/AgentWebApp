@@ -2,8 +2,8 @@
 {
     public class Setting : PublicBaseEntity
     {
-        public string SettingType { get; set; }
-        public string DisplayName { get; set; }
-        public string Description { get; set; }
+        public string SettingType { get; set; } = string.Empty; // e.g., "SiteName", "AdminEmail"
+        public string DisplayName { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
     }
 }

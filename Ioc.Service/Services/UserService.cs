@@ -26,6 +26,11 @@ namespace Ioc.Service.Services
             return await GetById(id);
         }
 
+       /* public async Task<User> GetUser(string name)
+        {
+            return await GetByUsername(name);
+        }*/
+
         public async Task InsertUser(User user)
         {
             await Create(user);

@@ -23,7 +23,7 @@ namespace AgentWebApp.Controllers
 
         public IActionResult UpdateDB()
         {
-            _repository.UpdateDB();
+            //_repository.UpdateDB();
             return Ok();
         }
     }

@@ -21,13 +21,14 @@ namespace Ioc.Data.Data
         {
         }
 
+
         public DbSet<Category>? Category { get; set; }
         public DbSet<SubCategory>? SubCategory { get; set; }
         public DbSet<User>? User { get; set; }
         public DbSet<UserProfile>? UserProfile { get; set; }
         public DbSet<CommonGroup>? CommonGroup { get; set; }
         public DbSet<Customer>? Customers { get; set; }
-        public DbSet<Setting>? Setting { get; set; }
+        public DbSet<Setting> Setting { get; set; }
         //public DbSet<RefreshToken> RefreshToken { get; set; }
         public DbSet<QuizSetup> QuizSetups { get; set; }
         public DbSet<QuestionSetup> QuestionSetup { get; set; }

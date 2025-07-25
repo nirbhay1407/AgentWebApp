@@ -7,6 +7,7 @@ namespace Ioc.Service.Interfaces
     {
         IQueryable<User> GetUsers();
         Task<User> GetUser(Guid id);
+        //Task<User> GetUser(string userName);
         Task InsertUser(User user);
         Task UpdateUser(User user);
         Task DeleteUser(Guid id);

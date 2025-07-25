@@ -4,26 +4,53 @@ using Ioc.Data;
 using Ioc.Data.Caches;
 using Ioc.Data.Data;
 using Ioc.Service.Interfaces.Common;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Ioc.Service.Services.Common
 {
-    public class SettingService : GenericRepository<Setting>, ISettingService
+    public class SettingService : ISettingService
     {
-        private readonly IocDbContext _dbContext;
-        public SettingService(IocDbContext dbContext, Func<CacheTech, ICacheService> cacheService)
-           : base(dbContext, cacheService)
+        private readonly IServiceProvider _serviceProvider;
+        private readonly object _lock = new();
+        private readonly Dictionary<string, string> _settings = new();
+
+
+        public SettingService(IServiceProvider serviceProvider, Func<CacheTech, ICacheService> cacheService)
         {
-            _dbContext = dbContext;
+            _serviceProvider = serviceProvider;
+
+            LoadSettings();
+
         }
 
-        public bool CheckExist(string setting)
+    /*    public bool CheckExist(string setting)
         {
             return _dbContext!.Setting!.Where(x => x.SettingType == setting).Any();
         }
+*/
 
-        public void UpdateDB()
+        private void LoadSettings()
         {
-            _dbContext.UpdateDb();
+            lock (_lock)
+            {
+                _settings.Clear();
+                using var scope = _serviceProvider.CreateScope();
+                var dbContext = scope.ServiceProvider.GetRequiredService<IocDbContext>();
+
+                List<Setting> settings = dbContext.Setting.ToList();
+                foreach (var setting in settings)
+                    _settings[setting.DisplayName] = setting.SettingType;
+            }
         }
+
+        public string Get(string key)
+        {
+            if (_settings.TryGetValue(key, out var value))
+                return value;
+            return null;
+        }
+
+        public void Refresh() => LoadSettings();
+
     }
 }

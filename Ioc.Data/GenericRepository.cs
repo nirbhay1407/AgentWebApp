@@ -92,6 +92,11 @@ namespace Ioc.Data
             return await _dbContext.Set<TEntity>().Where(e => e.ID == id).FirstOrDefaultAsync();
         }
 
+     /*   public async Task<TEntity> GetByUsername(name)
+        {
+            return await _dbContext.Set<TEntity>().Where(e => e. == id).FirstOrDefaultAsync();
+
+        }*/
         public async Task Create(TEntity entity)
         {
             try

@@ -1,4 +1,6 @@
-﻿using Ioc.Data.UnitOfWorkRepo;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Ioc.Data.Data;
+using Ioc.Data.UnitOfWorkRepo;
 using Ioc.Service.Interfaces;
 using Ioc.Service.Interfaces.Common;
 using Ioc.Service.Interfaces.Validation;
@@ -27,8 +29,13 @@ namespace AgentWebApp.Mapping
             builder.AddScoped<IAddressService, AddressService>(); 
             builder.AddScoped<ICustomerService, CustomerService>(); 
             builder.AddScoped<IValidationRuleRepository, ValidationRuleRepository>(); 
-            builder.AddScoped<ISettingService, SettingService>();
             builder.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            builder.AddScoped<IocDbContext>();
+
+            //singleton for services that do not require state
+            builder.AddSingleton<ISettingService, SettingService>();
+
 
         }
     }

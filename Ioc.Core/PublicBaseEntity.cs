@@ -2,6 +2,7 @@
 
 namespace Ioc.Core
 {
+
     public abstract class PublicBaseEntity
     {
         [Key]
@@ -12,7 +13,15 @@ namespace Ioc.Core
         public bool IsActive { get; set; } = true;
         public Guid? CreatedBy { get; set; }
         public Guid? ModifiedBy { get; set; }
+        public string SiteCode { get; set; } = "ZZZZ";
+
     }
+
+    public abstract class PublicBaseEntityUser : PublicBaseEntity 
+    {
+        public string SiteCode { get; set; } = "ZZZZ";
+    }
+
 
 
     public static class AuditableEntityExtensions
