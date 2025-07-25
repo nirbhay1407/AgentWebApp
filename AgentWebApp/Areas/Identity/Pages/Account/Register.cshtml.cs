@@ -169,11 +169,11 @@ namespace AgentWebApp.Areas.Identity.Pages.Account
                 //Here we create a Admin super user who will maintain the website                   
 
                 var user = CreateUser();
-                user.UserName = "nirbhay";
-                user.Email = "nirbhay@gmail.com";
+                user.UserName = "admin";
+                user.Email = "admin@gmail.com";
                 user.EmailConfirmed = true;
                 user.RefreshTokenExpiryTime = DateTime.UtcNow;
-                string userPWD = "Nirbhay@123";
+                string userPWD = "admin@123";
 
                 IdentityResult chkUser = await _userManager.CreateAsync(user, userPWD);
 
