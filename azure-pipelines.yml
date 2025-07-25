@@ -24,16 +24,16 @@ steps:
     projects: '**/*.csproj'
 
 
-- script: dotnet restore AgentWebApp/AgentWebApp.csproj
+- script: dotnet restore WebAPI/WebAPI.csproj
   displayName: 'Restore dependencies'
 
-- script: dotnet build AgentWebApp/AgentWebApp.csproj --configuration $(buildConfiguration) --no-restore
+- script: dotnet build WebAPI/WebAPI.csproj --configuration $(buildConfiguration) --no-restore
   displayName: 'Build'
 
-- script: dotnet test AgentWebApp/AgentWebApp.csproj --no-build --verbosity normal
+- script: dotnet test WebAPI/WebAPI.csproj --no-build --verbosity normal
   displayName: 'Test'
 
-- script: dotnet publish AgentWebApp/AgentWebApp.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish
+- script: dotnet publish WebAPI/WebAPI.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish
   displayName: 'Publish'
 
 # - task: PublishBuildArtifacts@1
@@ -61,13 +61,13 @@ steps:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/publish'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/publish/AgentWebApp.zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/publish/WebAPI.zip'
     replaceExistingArchive: true
 
 # 3. Publish the ZIP as an artifact
 - task: PublishBuildArtifacts@1
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)/publish/AgentWebApp.zip'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)/publish/WebAPI.zip'
     artifactName: 'drop'
 
 # 3.5. Download the artifact for deployment
@@ -84,4 +84,4 @@ steps:
     azureSubscription: 'FirstServiceConnection'
     appType: 'webApp'
     appName: 'AgentApp'
-    package: '$(Pipeline.Workspace)/drop/AgentWebApp.zip'
+    package: '$(Pipeline.Workspace)/drop/WebAPI.zip'
