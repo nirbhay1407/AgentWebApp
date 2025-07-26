@@ -103,7 +103,7 @@ namespace Ioc.Data
             {
                 var siteCode = string.Empty;
                 _cacheService(cacheTech).TryGet("SiteCode",out siteCode);
-                entity.SiteCode = siteCode;
+                entity.SiteCode = string.IsNullOrEmpty(siteCode) ? "ZZZ" : siteCode;
                 //entity.SetCreated(GetUserService.GetUserName());
                 await _dbContext.Set<TEntity>().AddAsync(entity);
                  _dbContext.ChangeTracker.DetectChanges();
@@ -114,11 +114,15 @@ namespace Ioc.Data
             catch (Exception ex)
             {
                 ex.ManualDBLog(nameof(entity), nameof(entity));
+                throw ex;
             }
         }
 
         public async Task CreateInRange(List<TEntity> entity)
         {
+            var siteCode = string.Empty;
+            _cacheService(cacheTech).TryGet("SiteCode", out siteCode);
+            entity.ForEach(x=>x.SiteCode = string.IsNullOrEmpty(siteCode) ? "ZZZ" : siteCode);
             await _dbContext.Set<TEntity>().AddRangeAsync(entity);
             _dbContext.ChangeTracker.DetectChanges();
             Console.WriteLine(_dbContext.ChangeTracker.DebugView.LongView);

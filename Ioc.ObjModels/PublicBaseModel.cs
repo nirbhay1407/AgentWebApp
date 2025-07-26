@@ -7,6 +7,7 @@ namespace Ioc.ObjModels
     {
         public Guid? ID { get; set; }
         public string? OldValue { get; set; }
+        public string SiteCode { get; set; } = "ZZZZ";
 
     }
 }

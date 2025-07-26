@@ -43,5 +43,9 @@ namespace Ioc.Service.Services
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<bool> CheckExistByName(string name)
+        {
+            return await _dbContext.Set<Category>().AnyAsync(x => x.Name == name);
+        }
     }
 }

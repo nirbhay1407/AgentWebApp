@@ -19,6 +19,9 @@ using System.Reflection;
 using WebAPI.CustomExceptionMiddleware;
 using WebAPI.Mapping;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
@@ -39,10 +42,16 @@ builder.Logging.AddFilter<ApplicationInsightsLoggerProvider>("Trace", LogLevel.T
 
 
 
-var connectionString = builder.Configuration.GetConnectionString("DbContextConnection") ?? throw new InvalidOperationException("Connection string 'DbContextConnection' not found.");
+/*var connectionString = builder.Configuration.GetConnectionString("DbContextConnection") ?? throw new InvalidOperationException("Connection string 'DbContextConnection' not found.");
 
 builder.Services.AddDbContext<IocDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString));*/
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionPQ") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+builder.Services.AddDbContext<IocDbContext>(options =>
+    options.UseNpgsql(connectionString));
+
 
 // For Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -90,7 +99,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.MapServiceSingleton();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddMaps(AppDomain.CurrentDomain.GetAssemblies());
+});
+
 
 builder.Services.Configure<CacheConfiguration>(builder.Configuration.GetSection("CacheConfiguration"));
 //For In-Memory Caching

@@ -7,39 +7,40 @@ namespace WebAPI.FakerData
 {
     public static class FakerDataClass
     {
+        // Generic method for generating fake data
+        public static List<T> GenerateFakeData<T>(int count, Action<Faker<T>> configureFaker) where T : class
+        {
+            var faker = new Faker<T>();
+            configureFaker(faker);
+            return faker.Generate(count);
+        }
 
         #region methods
         public static List<AddressModel> GetFakeDataAddress(int recordsToInsert)
         {
-            var bogus = new Faker<AddressModel>()
-               // .RuleFor(p => p.ID, f => Guid.NewGuid())
-               .RuleFor(a => a.Street, f => f.Address.StreetAddress())
-               .RuleFor(a => a.City, f => f.Address.City())
-                .RuleFor(a => a.State, f => f.Address.State())
-                .RuleFor(a => a.ZipCode, f => f.Address.ZipCode())
-                .RuleFor(a => a.Country, f => f.Random.Bool(0.9f) ? "IND" : f.Address.Country());
-
-            var data = bogus.Generate(recordsToInsert);
-
-            return data;
+            return GenerateFakeData<AddressModel>(recordsToInsert, faker =>
+            {
+                faker.RuleFor(a => a.Street, f => f.Address.StreetAddress())
+                     .RuleFor(a => a.City, f => f.Address.City())
+                      .RuleFor(a => a.State, f => f.Address.State())
+                      .RuleFor(a => a.ZipCode, f => f.Address.ZipCode())
+                      .RuleFor(a => a.Country, f => f.Random.Bool(0.9f) ? "IND" : f.Address.Country());
+            });
         }
 
         public static List<BankDetailsModel> GetFakeDataBankDetails(int recordsToInsert)
         {
-            var accountTypes = Enum.GetValues(typeof(AccountType));
-
-            var bankDetailsFaker = new Faker<BankDetailsModel>()
-                .RuleFor(b => b.BankName, f => f.Company.CompanyName())
-                .RuleFor(b => b.AccountHolderName, f => f.Name.FullName())
-                .RuleFor(b => b.AccountNumber, f => f.Finance.Account())
-                .RuleFor(b => b.RoutingNumber, f => f.Random.String2(9, "0123456789"))
-                .RuleFor(b => b.AccountType, f => AccountType.Savings)
-                .RuleFor(b => b.BranchName, f => f.Address.StreetName())
-                .RuleFor(b => b.BranchAddress, f => f.Address.FullAddress())
-                .RuleFor(b => b.SwiftCode, f => f.Random.String2(11, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"));
-
-            return bankDetailsFaker.Generate(recordsToInsert);
-
+            return GenerateFakeData<BankDetailsModel>(recordsToInsert, faker =>
+            {
+                faker.RuleFor(b => b.BankName, f => f.Company.CompanyName())
+                     .RuleFor(b => b.AccountHolderName, f => f.Name.FullName())
+                     .RuleFor(b => b.AccountNumber, f => f.Finance.Account())
+                     .RuleFor(b => b.RoutingNumber, f => f.Random.String2(9, "0123456789"))
+                     .RuleFor(b => b.AccountType, f => AccountType.Savings)
+                     .RuleFor(b => b.BranchName, f => f.Address.StreetName())
+                     .RuleFor(b => b.BranchAddress, f => f.Address.FullAddress())
+                     .RuleFor(b => b.SwiftCode, f => f.Random.String2(11, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"));
+            });
         }
 
 
@@ -47,8 +48,9 @@ namespace WebAPI.FakerData
 
         public static List<User> GetFakeUser(int recordsToInsert)
         {
-            var userFaker = new Faker<User>()
-                     .RuleFor(u => u.UserName, f => f.Internet.UserName())
+            return GenerateFakeData<User>(recordsToInsert, faker =>
+            {
+                faker.RuleFor(u => u.UserName, f => f.Internet.UserName())
                      .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.UserName))
                      .RuleFor(u => u.Password, f => f.Internet.Password())
                      .RuleFor(u => u.CreatedAt, f => f.Date.Past())
@@ -61,11 +63,7 @@ namespace WebAPI.FakerData
                          CreatedAt = DateTime.UtcNow,
                          ModifiedDate = DateTime.UtcNow
                      });
-
-            // Generate a fake User
-            var fakeUser = userFaker.Generate(recordsToInsert);
-
-            return fakeUser;
+            });
         }
 
         public static List<RandomGenHelp> GetFakeRandomGenHelp(RandomType type, int recordsToInsert)

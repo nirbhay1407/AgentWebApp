@@ -7,5 +7,6 @@ namespace Ioc.Service.Interfaces
     {
         Task<Category> GetCoolestCategory();
         Task<Category> GetDataBySp(Guid id);
+        Task<bool> CheckExistByName(String name);
     }
 }
